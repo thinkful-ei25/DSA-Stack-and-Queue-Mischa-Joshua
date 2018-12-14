@@ -117,6 +117,26 @@ function sortStack(stack){
   return tempStack;
 }
 
+//2 stacks ==> 
+/* 
+ stack 1 
+ stack 2
+ enqueue
+ --> stack1.push()
+
+ dequeue
+ --> if(!stack2){
+        if(!stack1){
+          return
+        }
+      }while(stack1.top){
+        stack2.push(stack1.pop());
+      }
+      return stack2.pop()
+
+
+*/
+
 function main() {
   // console.log(parens('()()()()'));
   // console.log(parens('())'));
@@ -129,10 +149,46 @@ function main() {
   toSort.push(1);
   toSort.push(2);
   toSort.push(10);
-  toSort.display();
-  const sorted = sortStack(toSort);
-  sorted.display();
+  // sorted.display();
+  toSort.stackDequeue();
   toSort.display();
 }
 
-main();
+
+
+
+
+
+class StackQueue{
+  constructor(){
+    this.stack1 = new Stack();
+    this.stack2 = new Stack();
+  }
+  enque(data){
+    this.stack1.push(data);
+  }
+  
+  dequeue(){
+    if(this.stack2.top === null){
+      if(this.stack1.top  === null){
+        return;
+      }
+      while(this.stack1.top){
+        this.stack2.push(this.stack1.pop());
+      }
+    } return this.stack2.pop();
+  }
+}
+
+function stackQueing(){
+  const stackQueue = new StackQueue;
+  stackQueue.enque(1);
+  stackQueue.enque(2);
+  stackQueue.enque(3);
+  console.log(stackQueue);
+  const popped = stackQueue.dequeue();
+  console.log(popped);
+  stackQueue.dequeue();
+  console.log(stackQueue);
+}
+stackQueing();
