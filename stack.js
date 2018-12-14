@@ -1,19 +1,19 @@
 'use strict';
 
 class _Node {
-  constructor(data, next){
+  constructor(data, next) {
     this.data = data;
     this.next = next;
   }
 }
 
 class Stack {
-  constructor(){
+  constructor() {
     this.top = null;
   }
 
-  push(data){
-    if(this.top === null){
+  push(data) {
+    if (this.top === null) {
       this.top = new _Node(data, null);
       return this.top;
     }
@@ -21,8 +21,8 @@ class Stack {
     this.top = node;
   }
 
-  pop(){
-    if(this.top === null){
+  pop() {
+    if (this.top === null) {
       return;
     }
     const node = this.top;
@@ -30,16 +30,16 @@ class Stack {
     return node.data;
   }
 
-  peek(){
-    if(this.top === null){
+  peek() {
+    if (this.top === null) {
       return null;
     }
     return this.top.data;
   }
 
-  display(){
+  display() {
     let node = this.top;
-    while(node){
+    while (node) {
       console.log(node.data);
       node = node.next;
     }
@@ -51,36 +51,59 @@ class Stack {
 // pop each one out add to tempStr 
 // if s === tempStr IT'S A PALINDROME!!!!
 
-function is_palindrome(s){
+function is_palindrome(s) {
   s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-  
+
   const stack = new Stack();
-  for(let i = 0; i < s.length; i++){
+  for (let i = 0; i < s.length; i++) {
     stack.push(s[i]);
   }
   let tempStr = '';
-  
-  while(stack.top){
+
+  while (stack.top) {
     tempStr += stack.pop();
   }
-  return s === tempStr;  
+  return s === tempStr;
 }
 
-function main(){
-  
-  console.log(is_palindrome("dad"));
-  console.log(is_palindrome("A man, a plan, a canal: Panama"));
-  console.log(is_palindrome("1001"));
-  console.log(is_palindrome("Tauhida"));
-  // let stack = new Stack();
-  // stack.push('Kirk');
-  // stack.push('Spock');
-  // stack.push('McCoy');
-  // stack.push('Scotty');
-  // // stack.display();
-  // stack.pop();
-  // stack.pop();
-  // stack.push('Scotty');
+function parens(s) {
+  let openBrack = 0;
+  let closedBrack = 0;
+  let position = 0;
+  const stack = new Stack();
+  for (let i = 0; i < s.length; i++) {
+    stack.push({ value: s[i], position: i });
+  }
+  while (stack.top) {
+    if (stack.peek().value === ')') {
+      stack.pop();
+      closedBrack++;
+      position++;
+    }
+    else if (stack.peek().value === '(') {
+      stack.pop();
+      openBrack++;
+      position++;
+    } else {
+      stack.pop();
+      position++;
+    }
+    if (closedBrack < openBrack) {
+      return ('error at ' + position);
+    }
+    
+  }
+  if (openBrack < closedBrack) {
+    return ('error too many opens ');
+  }
+  return true;
+}
+
+function main() {
+  console.log(parens('()()()()'));
+  console.log(parens('())'));
+  console.log(parens('(dwwd))'));
+  console.log(parens('((()))'));
 }
 
 main();
