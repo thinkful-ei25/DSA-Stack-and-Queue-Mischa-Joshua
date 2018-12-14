@@ -31,14 +31,14 @@ class Stack {
   }
 
   peek(){
-    if(this.top === nill){
+    if(this.top === null){
       return null;
     }
     return this.top.data;
   }
 
   display(){
-    let node = this.top
+    let node = this.top;
     while(node){
       console.log(node.data);
       node = node.next;
@@ -47,19 +47,40 @@ class Stack {
 
 }
 
+// push each char into stack
+// pop each one out add to tempStr 
+// if s === tempStr IT'S A PALINDROME!!!!
 
+function is_palindrome(s){
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  
+  const stack = new Stack();
+  for(let i = 0; i < s.length; i++){
+    stack.push(s[i]);
+  }
+  let tempStr = '';
+  
+  while(stack.top){
+    tempStr += stack.pop();
+  }
+  return s === tempStr;  
+}
 
 function main(){
-  let stack = new Stack();
-  stack.push('Kirk');
-  stack.push('Spock');
-  stack.push('McCoy');
-  stack.push('Scotty');
-  // stack.display();
-  stack.pop();
-  stack.pop();
-  stack.push('Scotty');
-  stack.display();
+  
+  console.log(is_palindrome("dad"));
+  console.log(is_palindrome("A man, a plan, a canal: Panama"));
+  console.log(is_palindrome("1001"));
+  console.log(is_palindrome("Tauhida"));
+  // let stack = new Stack();
+  // stack.push('Kirk');
+  // stack.push('Spock');
+  // stack.push('McCoy');
+  // stack.push('Scotty');
+  // // stack.display();
+  // stack.pop();
+  // stack.pop();
+  // stack.push('Scotty');
 }
 
 main();
