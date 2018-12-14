@@ -56,7 +56,9 @@ class Queue {
 
 
 }
-
+// <Front--------Back> Back == Previous, Front = Next
+//(Kirk, Spock, Uhura, Sulu, Checkov)
+//()
 function main(){
   const starTrekQ = new Queue;
   starTrekQ.enqueue('Kirk');
@@ -64,6 +66,10 @@ function main(){
   starTrekQ.enqueue('Uhura');
   starTrekQ.enqueue('Sulu');
   starTrekQ.enqueue('Checkov');
+  // starTrekQ.display();
+  // console.log(starTrekQ.peek());
+  starTrekQ.dequeue();
+  starTrekQ.dequeue()
   starTrekQ.display();
 }
 
