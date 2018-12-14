@@ -99,11 +99,40 @@ function parens(s) {
   return true;
 }
 
+//tempstack 
+// while stack do something--> 
+// tempnode --> store values for later!
+//while(stack) --> set tempnode stack.top  / stack.pop()
+//nested whileloop(while tempstack.top > tempnode.value) 
+
+function sortStack(stack){
+  let tempStack = new Stack();
+  while(stack.top !== null){
+    let tempNode = stack.pop();
+    while(tempStack.top !== null && tempStack.peek() > tempNode){
+      stack.push(tempStack.pop());
+    }
+    tempStack.push(tempNode);
+  }
+  return tempStack;
+}
+
 function main() {
-  console.log(parens('()()()()'));
-  console.log(parens('())'));
-  console.log(parens('(dwwd))'));
-  console.log(parens('((()))'));
+  // console.log(parens('()()()()'));
+  // console.log(parens('())'));
+  // console.log(parens('(dwwd))'));
+  // console.log(parens('((()))'));
+
+  let toSort = new Stack();
+  toSort.push(3);
+  toSort.push(8);
+  toSort.push(1);
+  toSort.push(2);
+  toSort.push(10);
+  toSort.display();
+  const sorted = sortStack(toSort);
+  sorted.display();
+  toSort.display();
 }
 
 main();
